@@ -22,13 +22,17 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 if(req.method == 'GET'){
-    let data = {};
+    let data = [];
 
     const getClients = async () => {
         const dataResponse = await getDocs(collection(db, "clients"));
         /* res.status(200).json(dataResponse) */
         dataResponse.forEach((doc) => {
-          data[doc.id] = doc.data();
+            let tempData = doc.data();
+            tempData['id'] = doc.id
+            data.push(tempData)
+
+          //data[doc.id] = doc.data();
         })
         res.status(200).json(data)
       }
@@ -51,7 +55,8 @@ else if(req.method == 'POST'){
           res.status(200).json('Erro ao adicionar o usuário no banco')
         }
     }
-    insert('terraria', 'la ele', 'sobe', 'laele.sexo@laele')
+    const dataReceived = req.body;
+    insert(dataReceived.nome, dataReceived.endereco, dataReceived.telefone, dataReceived.email)
     //res.status(200).json('Olá mundo POST')
 }
 
