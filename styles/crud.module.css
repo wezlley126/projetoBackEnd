@@ -1,0 +1,30 @@
+.addForm{
+    border: 2px solid white;
+    padding: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.inputs{
+    padding: 0.5rem 1rem;
+}
+
+.inputs:hover{
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+}
+
+.tableData td{
+    border: 2px solid white;
+    padding: 0.5rem;
+}
+
+.divTable{
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
