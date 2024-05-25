@@ -28,3 +28,19 @@
     justify-content: center;
     align-items: center;
 }
+
+.nav{
+    padding: 2rem;
+}
+
+.links{
+    text-decoration: none;
+    background-color: white;
+    padding: 1rem 2rem;
+}
+
+.links:hover{
+    background-color: rgb(201, 87, 201);
+    transition: 0.3s;
+    color: black;
+}

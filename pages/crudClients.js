@@ -1,8 +1,10 @@
 import axios from 'axios';
 import styles from './../styles/crud.module.css';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-export default function clients() {
+
+export default function Clients() {
 
     const [users, setUsers] = useState(null);
     const [inputs, setInputs] = useState({});
@@ -114,6 +116,9 @@ export default function clients() {
 
     return(
         <>
+        <nav className = {styles.nav} >
+            <Link className = {styles.links} href="/crudOS">Ordens de Serviço</Link>
+        </nav>
         <form className = {styles.addForm} onSubmit = {cancelForm}>
             <input id = 'nome' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'nome' placeholder = 'Nome' required />
             <input id = 'email' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'email' placeholder = 'Email' required />

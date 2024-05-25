@@ -1,6 +1,7 @@
 import axios from 'axios';
 import styles from './../styles/crud.module.css';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function ordensServico() {
 
@@ -108,6 +109,9 @@ export default function ordensServico() {
 
     return(
         <>
+            <nav className = {styles.nav} >
+                <Link className = {styles.links} href="/crudClients">Clientes</Link>
+            </nav>
             <form className = {styles.addForm} onSubmit = {cancelForm}>
                 <select id = 'status' disabled name = 'status' onChange = {inputsData} className = {styles.inputs}>
                     <option value = 'iniciado'>Iniciado</option>
