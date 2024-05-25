@@ -112,63 +112,65 @@ export default function ordensServico() {
             <nav className = {styles.nav} >
                 <Link className = {styles.links} href="/crudClients">Clientes</Link>
             </nav>
-            <form className = {styles.addForm} onSubmit = {cancelForm}>
-                <select id = 'status' disabled name = 'status' onChange = {inputsData} className = {styles.inputs}>
-                    <option value = 'iniciado'>Iniciado</option>
-                    <option value = 'em andamento'>Em andamento</option>
-                    <option value = 'concluido'>Concluido</option>
-                </select>
-                <select id = 'client' onChange = {inputsData} name = 'client' className = {styles.inputs}>
-                    <option value = 'Client1'>Client name</option>
+            <div className = {styles.divPai}>
+                <form className = {styles.addForm} onSubmit = {cancelForm}>
+                    <select id = 'status' disabled name = 'status' onChange = {inputsData} className = {styles.inputs}>
+                        <option value = 'iniciado'>Iniciado</option>
+                        <option value = 'em andamento'>Em andamento</option>
+                        <option value = 'concluido'>Concluido</option>
+                    </select>
+                    <select id = 'client' onChange = {inputsData} name = 'client' className = {styles.inputs}>
+                        <option value = 'Client1'>Client name</option>
+                        {
+                            clients.map(client => (
+                                <option value = {client.id} key = {client.id}>{client.nome}</option>
+                            ))
+                        }
+                    </select>
+                    <input id = 'date' name = 'date' className = {styles.inputs} onChange = {inputsData} type = 'date' />
+                    <input id = 'describe' name = 'describe' className = {styles.inputs} onChange = {inputsData} type = 'text' placeholder = 'Descrição'/>
+                    <input id = 'cost' name = 'cost' className = {styles.inputs} onChange = {inputsData} type = 'text' placeholder = 'Custo estimado'/>
+                    <SubmitButton />
+                </form>
+
+                <div className = {styles.divTable}>
+            <table className = {styles.tableData}>
+                <thead>
+                    <tr>
+                        <td>Alterar</td>
+                        <td>Id</td>
+                        <td>Status</td>
+                        <td>Cliente</td>
+                        <td>Data</td>
+                        <td>Descrição</td>
+                        <td>Custo</td>
+                        <td>Deletar</td>
+                    </tr>
+                </thead>
+                <tbody>
                     {
-                        clients.map(client => (
-                            <option value = {client.id} key = {client.id}>{client.nome}</option>
-                        ))
-                    }
-                </select>
-                <input id = 'date' name = 'date' className = {styles.inputs} onChange = {inputsData} type = 'date' />
-                <input id = 'describe' name = 'describe' className = {styles.inputs} onChange = {inputsData} type = 'text' placeholder = 'Descrição'/>
-                <input id = 'cost' name = 'cost' className = {styles.inputs} onChange = {inputsData} type = 'text' placeholder = 'Custo estimado'/>
-                <SubmitButton />
-            </form>
+                        //<td>{findItemById(ordem.client, clients)}</td>
+                        ordens.map(ordem => {
+                            const client = clients.find(client => client.id === ordem.client);
 
-            <div className = {styles.divTable}>
-        <table className = {styles.tableData}>
-            <thead>
-                <tr>
-                    <td>Alterar</td>
-                    <td>Id</td>
-                    <td>Status</td>
-                    <td>Cliente</td>
-                    <td>Data</td>
-                    <td>Descrição</td>
-                    <td>Custo</td>
-                    <td>Deletar</td>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    //<td>{findItemById(ordem.client, clients)}</td>
-                    ordens.map(ordem => {
-                        const client = clients.find(client => client.id === ordem.client);
-
-                        return(
-                            <tr key = {ordem.id}>
-                            <td><button onClick = {getOrdem} value = {ordem.id} className = {styles.inputs} >Alterar</button></td>
-                            <td>{ordem.id}</td>
-                            <td>{ordem.status}</td>
-                            <td>{client ? client.nome : 'Carregando...'}</td>
-                            <td>{ordem.date}</td>
-                            <td>{ordem.describe}</td>
-                            <td>{ordem.cost}</td>
-                            <td><button value = {ordem.id} onClick = {deleteData} className = {styles.inputs} >Deletar</button></td>
-                        </tr>
-                        )
-                        })
-                }
-            </tbody>
-        </table>
-        </div>
+                            return(
+                                <tr key = {ordem.id}>
+                                <td><button onClick = {getOrdem} value = {ordem.id} className = {styles.inputs} >Alterar</button></td>
+                                <td>{ordem.id}</td>
+                                <td>{ordem.status}</td>
+                                <td>{client ? client.nome : 'Carregando...'}</td>
+                                <td>{ordem.date}</td>
+                                <td>{ordem.describe}</td>
+                                <td>{ordem.cost}</td>
+                                <td><button value = {ordem.id} onClick = {deleteData} className = {styles.inputs} >Deletar</button></td>
+                            </tr>
+                            )
+                            })
+                        }
+                    </tbody>
+                </table>
+                </div>
+            </div>
         </>
     )
 }

@@ -7,8 +7,5 @@
 body{
   background-color: black;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
 }

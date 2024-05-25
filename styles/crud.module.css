@@ -5,6 +5,15 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.divPai{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .inputs{

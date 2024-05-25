@@ -119,43 +119,45 @@ export default function Clients() {
         <nav className = {styles.nav} >
             <Link className = {styles.links} href="/crudOS">Ordens de Serviço</Link>
         </nav>
-        <form className = {styles.addForm} onSubmit = {cancelForm}>
-            <input id = 'nome' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'nome' placeholder = 'Nome' required />
-            <input id = 'email' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'email' placeholder = 'Email' required />
-            <input id = 'telefone' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'telefone' placeholder = 'Telefone' required />
-            <input id = 'endereco' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'endereco' placeholder = 'Endereço' required />
-            <SubmitButton />
-        </form>
+        <div className = {styles.divPai}>
+            <form className = {styles.addForm} onSubmit = {cancelForm}>
+                <input id = 'nome' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'nome' placeholder = 'Nome' required />
+                <input id = 'email' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'email' placeholder = 'Email' required />
+                <input id = 'telefone' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'telefone' placeholder = 'Telefone' required />
+                <input id = 'endereco' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'endereco' placeholder = 'Endereço' required />
+                <SubmitButton />
+            </form>
 
-        <div className = {styles.divTable}>
-        <table className = {styles.tableData}>
-            <thead>
-                <tr>
-                    <td>Alterar</td>
-                    <td>Id</td>
-                    <td>Nome</td>
-                    <td>Email</td>
-                    <td>Telefone</td>
-                    <td>Endereco</td>
-                    <td>Deletar</td>
-                </tr>
-            </thead>
-            <tbody>
-            {
-                    users.map(user => (
-                        <tr key={user.id}>
-                            <td><button onClick = {getUser} value = {user.id} className = {styles.inputs} >Alterar</button></td>
-                            <td>{user.id}</td>
-                            <td>{user.nome}</td>
-                            <td>{user.email}</td>
-                            <td>{user.telefone}</td>
-                            <td>{user.endereco}</td>
-                            <td><button onClick = {dropUsers} value = {user.id} className = {styles.inputs} >Deletar</button></td>
-                        </tr>
-                    ))}
-            </tbody>
-        </table>
+            <div className = {styles.divTable}>
+            <table className = {styles.tableData}>
+                <thead>
+                    <tr>
+                        <td>Alterar</td>
+                        <td>Id</td>
+                        <td>Nome</td>
+                        <td>Email</td>
+                        <td>Telefone</td>
+                        <td>Endereco</td>
+                        <td>Deletar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {
+                        users.map(user => (
+                            <tr key={user.id}>
+                                <td><button onClick = {getUser} value = {user.id} className = {styles.inputs} >Alterar</button></td>
+                                <td>{user.id}</td>
+                                <td>{user.nome}</td>
+                                <td>{user.email}</td>
+                                <td>{user.telefone}</td>
+                                <td>{user.endereco}</td>
+                                <td><button onClick = {dropUsers} value = {user.id} className = {styles.inputs} >Deletar</button></td>
+                            </tr>
+                        ))}
+                </tbody>
+            </table>
+            </div>
         </div>
-        </>
+            </>
     )
 }
