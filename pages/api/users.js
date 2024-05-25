@@ -92,7 +92,7 @@ if(req.method == 'PUT'){
     }else{
         getUser(dataReceived)
     }
-
+    
   }
 
 else if(req.method == 'DELETE'){

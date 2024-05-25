@@ -69,6 +69,7 @@ export default function clients() {
             if(sendData.nome && sendData.endereco && sendData.telefone && sendData.email){
                 const response = await axios.post('/api/users', sendData)
                 console.log('Dados enviados: ', response.data)
+                setInputsValues(null, null, null, null)
                 getUsers()
             }else{
                 console.log('Prencha o formulário com os dados nescessários')
@@ -138,13 +139,13 @@ export default function clients() {
             {
                     users.map(user => (
                         <tr key={user.id}>
-                            <td><button onClick = {getUser} value = {user.id} className = {styles.inputs}>Alterar</button></td>
+                            <td><button onClick = {getUser} value = {user.id} className = {styles.inputs} >Alterar</button></td>
                             <td>{user.id}</td>
                             <td>{user.nome}</td>
                             <td>{user.email}</td>
                             <td>{user.telefone}</td>
                             <td>{user.endereco}</td>
-                            <td><button onClick = {dropUsers} value = {user.id} className = {styles.inputs}>Deletar</button></td>
+                            <td><button onClick = {dropUsers} value = {user.id} className = {styles.inputs} >Deletar</button></td>
                         </tr>
                     ))}
             </tbody>
