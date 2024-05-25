@@ -13,10 +13,6 @@ export default function ordensServico() {
         e.preventDefault();
     }
 
-    const findItemById = (id, data) => {
-        return data.find(item => item.id === id);
-    };
-
     const setInputsValues = async (statusOn, status, client, date, describe, cost) => {
         let statusInput = document.querySelector('#status')
         let clientInput = document.querySelector('#client')
@@ -148,18 +144,23 @@ export default function ordensServico() {
             </thead>
             <tbody>
                 {
-                    ordens.map(ordem => (
-                        <tr key = {ordem.id}>
+                    //<td>{findItemById(ordem.client, clients)}</td>
+                    ordens.map(ordem => {
+                        const client = clients.find(client => client.id === ordem.client);
+
+                        return(
+                            <tr key = {ordem.id}>
                             <td><button onClick = {getOrdem} value = {ordem.id} className = {styles.inputs} >Alterar</button></td>
                             <td>{ordem.id}</td>
                             <td>{ordem.status}</td>
-                            <td>{findItemById(ordem.client, clients).nome}</td>
+                            <td>{client ? client.nome : 'Carregando...'}</td>
                             <td>{ordem.date}</td>
                             <td>{ordem.describe}</td>
                             <td>{ordem.cost}</td>
                             <td><button value = {ordem.id} onClick = {deleteData} className = {styles.inputs} >Deletar</button></td>
                         </tr>
-                    ))
+                        )
+                        })
                 }
             </tbody>
         </table>
