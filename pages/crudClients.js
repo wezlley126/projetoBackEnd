@@ -9,11 +9,25 @@ export default function Clients() {
     const [users, setUsers] = useState(null);
     const [inputs, setInputs] = useState({});
     const [submit, setSubmit] = useState(false)
+    const [titleForm, setTitleForm] = useState('Adicionar Cliente')
     //const [dataTable, setDataTable] = useState(null);
 
     const cancelForm = (e) => {
         e.preventDefault();
     }
+
+    const closeForm = () => {
+        divForm.style.display = 'none';
+        setInputsValues(null, null, null, null, null)
+        if(submit){
+            setSubmit(false);
+        }
+    }
+
+    const openForm = () => {
+        divForm.style.display = 'flex';
+    }
+
 
     const setInputsValues = async (nome, email, telefone, endereco) => {
         let nomeInput = document.querySelector('#nome')
@@ -30,15 +44,17 @@ export default function Clients() {
 
     const SubmitButton = () => {
         if(submit){
+            setTitleForm('Alterar dados do Cliente')
             return(
                 <>
                 <button onClick = {updateUser} className = {styles.inputs}>Salvar Alterações</button>
                 </>
             )
         }else{
+            setTitleForm('Adicionar Cliente')
             return(
                 <>
-                <button onClick = {insertUsers} className = {styles.inputs}>Criar usuário</button>
+                <button onClick = {insertUsers} className = {styles.inputs}>Adicionar</button>
                 </>
             )
         }
@@ -71,6 +87,7 @@ export default function Clients() {
             if(sendData.nome && sendData.endereco && sendData.telefone && sendData.email){
                 const response = await axios.post('/api/users', sendData)
                 console.log('Dados enviados: ', response.data)
+                setInputs({})
                 setInputsValues(null, null, null, null)
                 getUsers()
             }else{
@@ -82,6 +99,7 @@ export default function Clients() {
     // ---------------------- PUT ----------------------
 
     const getUser = async (e) => {
+        openForm();
         // Pega os dados do usuário do botaõ Alterar
         const idUser = {idUser: e.target.value}
         const dataReceived = await axios.put('/api/users', idUser)
@@ -120,13 +138,18 @@ export default function Clients() {
             <Link className = {styles.links} href="/crudOS">Ordens de Serviço</Link>
         </nav>
         <div className = {styles.divPai}>
-            <form className = {styles.addForm} onSubmit = {cancelForm}>
-                <input id = 'nome' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'nome' placeholder = 'Nome' required />
-                <input id = 'email' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'email' placeholder = 'Email' required />
-                <input id = 'telefone' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'telefone' placeholder = 'Telefone' required />
-                <input id = 'endereco' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'endereco' placeholder = 'Endereço' required />
-                <SubmitButton />
-            </form>
+            <button onClick = {openForm} className = {styles.novaOrdem}>Adicionar Cliente</button>
+            <div id = 'divForm' className = {styles.divForm}>
+                <button onClick = {closeForm} className = {styles.closeForm}>Fechar</button>
+                <form className = {styles.addForm} onSubmit = {cancelForm}>
+                    <h2>{titleForm}</h2>
+                    <input id = 'nome' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'nome' placeholder = 'Nome' required />
+                    <input id = 'email' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'email' placeholder = 'Email' required />
+                    <input id = 'telefone' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'telefone' placeholder = 'Telefone' required />
+                    <input id = 'endereco' className = {styles.inputs} type = 'text' onChange = {inputsData} name = 'endereco' placeholder = 'Endereço' required />
+                    <SubmitButton />
+                </form>
+            </div>
 
             <div className = {styles.divTable}>
             <table className = {styles.tableData}>
